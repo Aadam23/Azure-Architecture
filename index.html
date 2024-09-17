@@ -1,0 +1,26 @@
+<form id="feedbackForm">
+  <input type="text" id="userId" placeholder="Enter your user ID" required />
+  <textarea id="feedback" placeholder="Enter feedback" required></textarea>
+  <button type="submit">Submit</button>
+  <link rel="stylesheet" href="styles.css">
+</form>
+
+<script>
+  document.getElementById("feedbackForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const feedback = document.getElementById("feedback").value;
+    const userId = document.getElementById("userId").value;
+
+    const response = await fetch("<YOUR_FUNCTION_URL>", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ feedback, userId }),
+    });
+
+    const result = await response.json();
+    alert(result.message);
+  });
+</script>
